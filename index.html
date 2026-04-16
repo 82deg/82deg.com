@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="auto">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -23,13 +23,51 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=Hanken+Grotesk:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+    <script>
+      // Theme boot: avoid flash by applying stored preference before paint.
+      (() => {
+        try {
+          const t = localStorage.getItem("theme");
+          if (t === "light" || t === "dark") {
+            document.documentElement.setAttribute("data-theme", t);
+          }
+        } catch {}
+      })();
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- Decorative scroll-driven scene -->
+    <div class="scene" aria-hidden="true">
+      <svg class="scene__grid" width="100%" height="100%" preserveAspectRatio="none">
+        <defs>
+          <pattern id="gridDot" width="40" height="40" patternUnits="userSpaceOnUse">
+            <circle cx="1" cy="1" r="1" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#gridDot)" />
+      </svg>
+      <span class="scene__blob scene__blob--a"></span>
+      <span class="scene__blob scene__blob--b"></span>
+      <svg class="scene__ring" viewBox="0 0 200 200" aria-hidden="true">
+        <circle cx="100" cy="100" r="92" fill="none" stroke-width="0.6" />
+        <circle cx="100" cy="100" r="62" fill="none" stroke-width="0.6" />
+        <circle cx="100" cy="100" r="32" fill="none" stroke-width="0.6" />
+      </svg>
+      <svg class="scene__cross" viewBox="0 0 40 40" aria-hidden="true">
+        <line x1="20" y1="4" x2="20" y2="36" stroke-width="1" />
+        <line x1="4" y1="20" x2="36" y2="20" stroke-width="1" />
+      </svg>
+      <svg class="scene__arc" viewBox="0 0 300 300" aria-hidden="true">
+        <path d="M10 150 A 140 140 0 0 1 290 150" fill="none" stroke-width="0.8" />
+      </svg>
+      <span class="scene__line scene__line--v"></span>
+    </div>
 
     <header class="nav" id="nav">
       <div class="container nav__inner">
@@ -40,34 +78,63 @@
           <a href="#about">About</a>
           <a href="#work">What I do</a>
           <a href="#projects">Side projects</a>
+          <a href="#experience">Experience</a>
           <a href="#contact" class="nav__cta">Get in touch</a>
         </nav>
+        <button
+          type="button"
+          id="themeToggle"
+          class="theme-toggle"
+          aria-label="Switch theme"
+          title="Switch theme"
+        >
+          <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.2" fill="currentColor" />
+            <g stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+              <line x1="12" y1="2.5" x2="12" y2="5" />
+              <line x1="12" y1="19" x2="12" y2="21.5" />
+              <line x1="2.5" y1="12" x2="5" y2="12" />
+              <line x1="19" y1="12" x2="21.5" y2="12" />
+              <line x1="4.9" y1="4.9" x2="6.7" y2="6.7" />
+              <line x1="17.3" y1="17.3" x2="19.1" y2="19.1" />
+              <line x1="4.9" y1="19.1" x2="6.7" y2="17.3" />
+              <line x1="17.3" y1="6.7" x2="19.1" y2="4.9" />
+            </g>
+          </svg>
+          <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M20.5 14.3A8 8 0 1 1 9.7 3.5a7 7 0 0 0 10.8 10.8Z"
+              fill="currentColor"
+            />
+          </svg>
+        </button>
       </div>
     </header>
 
     <main id="main">
       <section class="hero" id="top">
         <div class="container">
-          <p class="eyebrow">
+          <p class="eyebrow reveal">
             <span class="eyebrow__dot" aria-hidden="true"></span>
             Andreas Gerolemou &middot; Amsterdam
           </p>
-          <h1 class="hero__title">
+          <h1 class="hero__title reveal">
             <span>AI-first</span>
             <span class="hero__title--accent">Product Manager</span>
           </h1>
-          <p class="hero__lede">
-            I help teams turn AI capabilities into products people actually use &mdash;
-            from first prototype to shipped feature, grounded in real user value.
+          <p class="hero__lede reveal">
+            I bridge customer insights with business strategy &mdash; and turn AI
+            capabilities into products teams actually rely on. From first prototype
+            to measurable impact.
           </p>
-          <div class="hero__cta">
+          <div class="hero__cta reveal">
             <a href="#contact" class="btn btn--primary">Start a conversation</a>
             <a href="#work" class="btn btn--ghost">See how I work</a>
           </div>
 
-          <dl class="stats" aria-label="At a glance">
+          <dl class="stats reveal" aria-label="At a glance">
             <div class="stats__item">
-              <dt>Years in product &amp; design</dt>
+              <dt>Years in UX &amp; product</dt>
               <dd>15+</dd>
             </div>
             <div class="stats__item">
@@ -88,27 +155,34 @@
 
       <section class="section section--about" id="about">
         <div class="container section__grid">
-          <div class="section__head">
+          <div class="section__head reveal">
             <p class="section__kicker">About</p>
-            <h2 class="section__title">From pixels to products to&nbsp;prompts.</h2>
+            <h2 class="section__title">Customer insight meets business&nbsp;strategy.</h2>
           </div>
-          <div class="section__body">
+          <div class="section__body reveal">
             <p>
-              I founded <strong>82 Degrees</strong> back in 2009 as a design studio. Since
-              then I&rsquo;ve sampled most corners of the craft &mdash; graphic design,
-              editorial, UX, digital strategy, and for the past decade, product
-              leadership in fintech at scale.
+              I&rsquo;m a <strong>Senior Product Manager in fintech</strong> with 15+
+              years in UX and product leadership. I bridge customer insight with
+              business strategy &mdash; driving digital innovation, leading global
+              cross-functional teams, and delivering impactful solutions with
+              measurable results.
             </p>
             <p>
-              Today I work as an <strong>AI-first Product Manager</strong>. That means I
-              start from what the model can plausibly do, pair it with honest user
-              research, and ship something with guardrails, evals, and a clear path to
-              measurable impact &mdash; not a demo that dies in a slide deck.
+              My focus today is <strong>AI products and transformation</strong>. The
+              last 18 months I&rsquo;ve been leading the evolution of Backbase.io into
+              an AI-first knowledge hub &mdash; retrieval-augmented generation,
+              role-aware delivery, and the quiet engineering that turns AI demos into
+              products teams actually rely on.
+            </p>
+            <p>
+              I founded <strong>82 Degrees</strong> in 2009 as an independent studio;
+              it&rsquo;s now the home for selected freelance AI product engagements
+              outside of Backbase, and for the side projects I ship when no one&rsquo;s
+              paying me to.
             </p>
             <p class="muted">
-              Stanford Online Product Management (XPROD110, 2024). Currently Principal
-              UX/UI Consultant at Backbase while taking on selected freelance AI product
-              engagements under 82 Degrees.
+              Stanford Online Product Management (XPROD110, 2024). Based in Amsterdam,
+              registered as ZZP in the Netherlands.
             </p>
           </div>
         </div>
@@ -116,37 +190,37 @@
 
       <section class="section section--work" id="work">
         <div class="container">
-          <div class="section__head section__head--center">
+          <div class="section__head section__head--center reveal">
             <p class="section__kicker">What I do</p>
             <h2 class="section__title">Three ways I help teams ship&nbsp;AI.</h2>
           </div>
 
           <ul class="cards">
-            <li class="card">
+            <li class="card reveal">
               <span class="card__num">01</span>
-              <h3 class="card__title">AI product strategy</h3>
+              <h3 class="card__title">Strategy &amp; discovery</h3>
               <p>
-                Map where AI actually earns its keep in your product. Prioritise use
-                cases by feasibility, value, and risk &mdash; then turn the shortlist
-                into a concrete roadmap your team can execute against.
+                Translate customer insight and business strategy into a prioritised AI
+                product roadmap. Sharp theses on where AI actually earns its keep,
+                tested against real users and honest evals &mdash; not wishful thinking.
               </p>
             </li>
-            <li class="card">
+            <li class="card reveal">
               <span class="card__num">02</span>
-              <h3 class="card__title">Discovery &amp; prototyping</h3>
+              <h3 class="card__title">Teams &amp; delivery</h3>
               <p>
-                Rapid prototyping with LLMs, evals, and real users in the loop. We learn
-                fast which flows hold up under messy input and which are theatre &mdash;
-                before you commit engineering quarters to them.
+                Lead cross-functional, globally distributed product teams. Set the
+                operating rhythm across design, engineering, data, and QA &mdash; so
+                shipping AI stops being a heroic act and starts being a cadence.
               </p>
             </li>
-            <li class="card">
+            <li class="card reveal">
               <span class="card__num">03</span>
-              <h3 class="card__title">Shipping &amp; measuring</h3>
+              <h3 class="card__title">Impact &amp; measurement</h3>
               <p>
-                Taking features from prompt to production: guardrails, observability,
-                evals, and the KPIs that matter. Boring, rigorous, compounding &mdash;
-                exactly what AI features need to stop being demos.
+                Take features from prompt to production with guardrails, evals, and
+                the KPIs that matter. Boring, rigorous, compounding &mdash; exactly
+                what AI products need to stop being demos and start delivering results.
               </p>
             </li>
           </ul>
@@ -155,7 +229,7 @@
 
       <section class="section section--projects" id="projects">
         <div class="container">
-          <div class="section__head section__head--center">
+          <div class="section__head section__head--center reveal">
             <p class="section__kicker">Side projects</p>
             <h2 class="section__title">Things I&rsquo;m building on the&nbsp;side.</h2>
             <p class="section__sub">
@@ -165,7 +239,7 @@
           </div>
 
           <ul class="projects">
-            <li class="project">
+            <li class="project reveal">
               <div class="project__tag">AI &middot; RAG</div>
               <h3 class="project__title">Poetry Cove</h3>
               <p>
@@ -177,7 +251,7 @@
                 poetry-cove.com <span aria-hidden="true">&rarr;</span>
               </a>
             </li>
-            <li class="project">
+            <li class="project reveal">
               <div class="project__tag">Publishing</div>
               <h3 class="project__title">Word search puzzle books</h3>
               <p>
@@ -187,7 +261,7 @@
               </p>
               <span class="project__link project__link--muted">On Amazon</span>
             </li>
-            <li class="project">
+            <li class="project reveal">
               <div class="project__tag">Handmade</div>
               <h3 class="project__title">Handmade wallets</h3>
               <p>
@@ -201,9 +275,137 @@
         </div>
       </section>
 
+      <section class="section section--experience" id="experience">
+        <div class="container">
+          <div class="section__head section__head--center reveal">
+            <p class="section__kicker">Experience</p>
+            <h2 class="section__title">A 17-year trail of product&nbsp;work.</h2>
+            <p class="section__sub">
+              From independent studio, to global design leadership, to AI product
+              management &mdash; in reverse order.
+            </p>
+          </div>
+
+          <div class="era reveal">
+            <header class="era__head">
+              <h3 class="era__title">Backbase</h3>
+              <span class="era__dates">Oct 2016 &ndash; Present &middot; Amsterdam</span>
+            </header>
+            <ol class="roles">
+              <li class="role role--current">
+                <span class="role__date">Apr 2025 &ndash; Present</span>
+                <h4 class="role__title">Senior Product Manager &mdash; AI Knowledge Hub</h4>
+                <p>
+                  Leading the transformation of Backbase.io into an AI-first knowledge
+                  hub. Retrieval-augmented generation, role-aware delivery, and the
+                  surrounding guardrails, evals, and measurement that make it production-grade.
+                </p>
+              </li>
+              <li class="role">
+                <span class="role__date">Apr 2023 &ndash; Mar 2025</span>
+                <h4 class="role__title">Senior Product Manager &mdash; Showcase</h4>
+                <p>
+                  Led a multidisciplinary team that built a unified demo platform for
+                  Backbase&rsquo;s product portfolio. Owned product, QA oversight,
+                  design leadership, and engineering management for the squad.
+                </p>
+              </li>
+              <li class="role">
+                <span class="role__date">Jan 2021 &ndash; Apr 2023</span>
+                <h4 class="role__title">Lead Principal UX Consultant</h4>
+                <p>
+                  Built and led a 10+ person global UX team across EMEA, North America,
+                  Latin America, and Asia. EMEA Chapter Lead. Mentored UX and product
+                  teams; standardised practices across professional services.
+                </p>
+              </li>
+              <li class="role">
+                <span class="role__date">Jul 2018 &ndash; Jan 2021</span>
+                <h4 class="role__title">Principal UX Consultant</h4>
+                <p>
+                  Partnered with 20+ banks and financial institutions on five continents
+                  to ship digital banking products. Led user research, usability
+                  testing, and tailored UX programmes for enterprise clients.
+                </p>
+              </li>
+              <li class="role">
+                <span class="role__date">Oct 2016 &ndash; Jul 2018</span>
+                <h4 class="role__title">Senior UX Consultant</h4>
+                <p>
+                  On-site UX delivery for priority implementations. Ran training and
+                  design-system education for client teams new to enterprise UX.
+                </p>
+              </li>
+            </ol>
+          </div>
+
+          <div class="era reveal">
+            <header class="era__head">
+              <h3 class="era__title">Selected client engagements</h3>
+              <span class="era__dates">2016 &ndash; 2026 &middot; Backbase</span>
+            </header>
+            <ul class="clients">
+              <li><span class="client__name">Tech CU</span><span class="client__role">Strategy consulting, user research</span></li>
+              <li><span class="client__name">Standard Bank Group</span><span class="client__role">Strategy, consulting</span></li>
+              <li><span class="client__name">Hellenic Bank Cyprus</span><span class="client__role">UX, consulting, implementation</span></li>
+              <li><span class="client__name">Stanbic Bank Kenya</span><span class="client__role">UX, consulting</span></li>
+              <li><span class="client__name">Standard Bank South Africa</span><span class="client__role">UX, consulting, implementation</span></li>
+              <li><span class="client__name">I&amp;M Bank Kenya</span><span class="client__role">UX, consulting, training</span></li>
+              <li><span class="client__name">Rabobank Australia</span><span class="client__role">UX, consulting, training</span></li>
+              <li><span class="client__name">Caixa Geral de Depósitos</span><span class="client__role">Consulting</span></li>
+              <li><span class="client__name">Unitel Mongolia</span><span class="client__role">Consulting, training</span></li>
+              <li><span class="client__name">Royal Bank of Canada</span><span class="client__role">Consulting, training</span></li>
+              <li><span class="client__name">Banque de Luxembourg</span><span class="client__role">UX, consulting, implementation</span></li>
+              <li><span class="client__name">Latitude Financial Services Australia</span><span class="client__role">Consulting</span></li>
+              <li><span class="client__name">C. Hoare Bank</span><span class="client__role">Implementation, consulting</span></li>
+              <li><span class="client__name">GLS Bank</span><span class="client__role">Consulting, implementation</span></li>
+              <li><span class="client__name">Raiffeisen</span><span class="client__role">Consulting</span></li>
+              <li><span class="client__name">Arab Bank Corporation Bahrain</span><span class="client__role">Training, consulting</span></li>
+              <li><span class="client__name">National Industrial Credit Bank Kenya</span><span class="client__role">Consulting, training</span></li>
+              <li><span class="client__name">Siam Commercial Bank Thailand</span><span class="client__role">Consulting</span></li>
+              <li><span class="client__name">Finovate 2018 <em>(Best of Show)</em></span><span class="client__role">UX concept</span></li>
+              <li><span class="client__name">North Carolina State Employees&rsquo; Credit Union</span><span class="client__role">Implementation, user research, consulting, training</span></li>
+              <li><span class="client__name">National Bank of Bahrain</span><span class="client__role">Consulting</span></li>
+              <li><span class="client__name">Capital Bank of Jordan</span><span class="client__role">Implementation</span></li>
+              <li><span class="client__name">Íslandsbanki</span><span class="client__role">Consulting</span></li>
+            </ul>
+          </div>
+
+          <div class="era reveal">
+            <header class="era__head">
+              <h3 class="era__title">Studio 82 Degrees</h3>
+              <span class="era__dates">2009 &ndash; 2016 &middot; independent studio, Amsterdam</span>
+            </header>
+            <p class="era__note">
+              Freelance &amp; contract work across UX, branding, web, print, and visual
+              communication for a mix of agencies, cultural institutions, and enterprise
+              clients.
+            </p>
+            <ul class="clients">
+              <li><span class="client__name">Welbo</span><span class="client__role">Consulting, UX</span></li>
+              <li><span class="client__name">Alpha Dental</span><span class="client__role">Brand, website, photography</span></li>
+              <li><span class="client__name">BloemenBlos</span><span class="client__role">Brand, website</span></li>
+              <li><span class="client__name">Caesar Groep</span><span class="client__role">Visual communication</span></li>
+              <li><span class="client__name">C3 Amsterdam</span><span class="client__role">Visual communication</span></li>
+              <li><span class="client__name">De Lach van Bovenkerk</span><span class="client__role">Brand, website</span></li>
+              <li><span class="client__name">e-Learning Fabriek</span><span class="client__role">Instructional design</span></li>
+              <li><span class="client__name">Magion</span><span class="client__role">Visual communication</span></li>
+              <li><span class="client__name">the Muzes</span><span class="client__role">Brand, website, visual communication</span></li>
+              <li><span class="client__name">Nederlandse Spoorwegen</span><span class="client__role">Visual communication</span></li>
+              <li><span class="client__name">PixelFlakes</span><span class="client__role">Consulting, visual design</span></li>
+              <li><span class="client__name">Publicis Groupe</span><span class="client__role">Storytelling, concept, consulting</span></li>
+              <li><span class="client__name">Quint Wellington Redwood</span><span class="client__role">Visual communication</span></li>
+              <li><span class="client__name">Samsung</span><span class="client__role">Visual communication</span></li>
+              <li><span class="client__name">Universiteit van Amsterdam</span><span class="client__role">Visual design, consulting</span></li>
+              <li><span class="client__name">Vereniging van Openbare Bibliotheken</span><span class="client__role">Visual communication</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
       <section class="section section--contact" id="contact">
         <div class="container contact__grid">
-          <div class="contact__intro">
+          <div class="contact__intro reveal">
             <p class="section__kicker">Contact</p>
             <h2 class="section__title">Let&rsquo;s talk about your AI&nbsp;product.</h2>
             <p>
@@ -228,7 +430,7 @@
           </div>
 
           <form
-            class="contact__form"
+            class="contact__form reveal"
             id="contactForm"
             action="https://formspree.io/f/your-form-id"
             method="POST"
