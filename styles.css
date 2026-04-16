@@ -887,6 +887,98 @@ a {
 .section--contact {
   background: var(--bg-elev);
 }
+.avatar-wrap {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 1.5rem;
+}
+.contact__avatar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--line);
+  box-shadow: var(--shadow-md);
+  z-index: 1;
+}
+
+/* Concentric rings */
+.avatar-ring {
+  position: absolute;
+  inset: 0;
+  stroke: var(--scene-stroke);
+  opacity: 0.7;
+}
+.avatar-ring--outer {
+  animation: avatar-spin 90s linear infinite;
+}
+.avatar-ring--inner {
+  animation: avatar-spin 60s linear infinite reverse;
+}
+
+/* Orbiting dots */
+.avatar-dot {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.5;
+}
+.avatar-dot--a {
+  top: 6px;
+  left: calc(50% - 2.5px);
+  animation: avatar-pulse 3s ease-in-out infinite;
+}
+.avatar-dot--b {
+  bottom: 18px;
+  right: 12px;
+  width: 4px;
+  height: 4px;
+  opacity: 0.35;
+  animation: avatar-pulse 3s ease-in-out 1s infinite;
+}
+.avatar-dot--c {
+  bottom: 18px;
+  left: 12px;
+  width: 3px;
+  height: 3px;
+  opacity: 0.25;
+  animation: avatar-pulse 3s ease-in-out 2s infinite;
+}
+
+/* Small cross */
+.avatar-cross {
+  position: absolute;
+  top: -6px;
+  right: 10px;
+  width: 18px;
+  height: 18px;
+  stroke: var(--scene-stroke);
+  animation: avatar-spin 40s linear infinite;
+}
+
+/* Decorative arc */
+.avatar-arc {
+  position: absolute;
+  inset: -10px;
+  stroke: var(--scene-stroke);
+  opacity: 0.5;
+  animation: avatar-spin 120s linear infinite reverse;
+}
+
+@keyframes avatar-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes avatar-pulse {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.5); }
+}
 .contact__centered {
   max-width: 42rem;
   margin: 0 auto;
