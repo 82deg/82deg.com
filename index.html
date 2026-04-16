@@ -403,15 +403,15 @@
       </section>
 
       <section class="section section--contact" id="contact">
-        <div class="container contact__grid">
-          <div class="contact__intro reveal">
+        <div class="container">
+          <div class="contact__centered reveal">
             <p class="section__kicker">Contact</p>
-            <h2 class="section__title">Let&rsquo;s talk about your AI&nbsp;product.</h2>
+            <h2 class="section__title">Let&rsquo;s talk.</h2>
             <p>
-              Have an AI feature stuck in demo limbo, a fuzzy roadmap, or a product idea
-              you want to pressure-test? Drop a note and I&rsquo;ll get back to you.
+              Have an AI product challenge, a fuzzy roadmap, or an idea you want to
+              pressure-test? Reach out &mdash; I&rsquo;d love to hear from you.
             </p>
-            <ul class="contact__links" aria-label="Elsewhere">
+            <ul class="contact__links contact__links--row" aria-label="Elsewhere">
               <li>
                 <a href="https://www.linkedin.com/in/agerolemou/" target="_blank" rel="noopener">
                   LinkedIn <span aria-hidden="true">&rarr;</span>
@@ -423,34 +423,10 @@
                 </a>
               </li>
               <li>
-                <a href="mailto:hello@82deg.com">hello@82deg.com</a>
+                <span class="email-ob">hello [at] 82deg [dot] com</span>
               </li>
             </ul>
           </div>
-
-          <form
-            class="contact__form reveal"
-            id="contactForm"
-            action="https://formspree.io/f/your-form-id"
-            method="POST"
-            novalidate
-          >
-            <div class="field">
-              <label for="name">Name</label>
-              <input id="name" name="name" type="text" required autocomplete="name" />
-            </div>
-            <div class="field">
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" required autocomplete="email" />
-            </div>
-            <div class="field">
-              <label for="message">What&rsquo;s on your mind?</label>
-              <textarea id="message" name="message" rows="5" required></textarea>
-            </div>
-            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
-            <button class="btn btn--primary btn--full" type="submit">Send message</button>
-            <p class="form__status" id="formStatus" role="status" aria-live="polite"></p>
-          </form>
         </div>
       </section>
     </main>
@@ -462,7 +438,7 @@
           <span class="footer__name">82 Degrees &middot; Andreas Gerolemou</span>
         </div>
         <p class="footer__meta">
-          &copy; <span id="year"></span> 82 Degrees.
+          &copy; <span id="year"></span> 82 Degrees
         </p>
       </div>
     </footer>
