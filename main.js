@@ -45,6 +45,37 @@
 
   // ---- Nav scrolled state ---------------------------------------------
   const nav = document.getElementById("nav");
+  const navSectionLinks = Array.from(
+    document.querySelectorAll('.nav__links a[href^="#"]:not(.nav__cta)')
+  );
+  const navTargets = navSectionLinks
+    .map((link) => {
+      const id = link.getAttribute("href")?.slice(1);
+      if (!id) return null;
+      const section = document.getElementById(id);
+      if (!section) return null;
+      return { link, section };
+    })
+    .filter(Boolean);
+
+  const setActiveNavLink = (activeLink) => {
+    navSectionLinks.forEach((link) => {
+      link.classList.toggle("is-active", link === activeLink);
+    });
+  };
+  const updateActiveNavByViewport = () => {
+    if (!navTargets.length) return;
+    const viewportProbe = window.innerHeight * 0.38;
+    let active = navTargets[0];
+
+    for (const item of navTargets) {
+      const rect = item.section.getBoundingClientRect();
+      if (rect.top <= viewportProbe) active = item;
+      else break;
+    }
+
+    setActiveNavLink(active?.link ?? null);
+  };
 
   // ---- Scroll-driven scene shapes -------------------------------------
   let rafId = 0;
@@ -53,6 +84,7 @@
   const updateScroll = () => {
     rafId = 0;
     const y = window.scrollY || window.pageYOffset || 0;
+    updateActiveNavByViewport();
     if (y === lastScroll) return;
     lastScroll = y;
 
@@ -72,6 +104,8 @@
 
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", onScroll);
+  window.addEventListener("hashchange", updateActiveNavByViewport);
+  navSectionLinks.forEach((link) => link.addEventListener("click", updateActiveNavByViewport));
   updateScroll();
 
   // ---- Reveal-on-scroll via IntersectionObserver ----------------------
