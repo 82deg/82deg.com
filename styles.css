@@ -1,5 +1,5 @@
 /* ==========================================================================
-   82 Degrees — one-page site
+   82 Degrees: one-page site
    ========================================================================== */
 
 /* ----- Theme tokens --------------------------------------------------- */
@@ -27,7 +27,7 @@
   --pad: clamp(1.25rem, 3vw, 2rem);
 }
 
-/* Dark theme — applied when user selects dark or when "auto" + system = dark */
+/* Dark theme: applied when user selects dark or when "auto" + system = dark */
 :root[data-theme="dark"],
 :root[data-theme="auto"] {
   /* auto falls back to media query below */
